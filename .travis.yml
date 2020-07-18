@@ -1,0 +1,16 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t lek/react-test -f  ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true lek/react-test npm test #เติม -- --coverage เอาไว้เพื่อให้เวลา run test จบจะออกจาก command ของ docker
+    # -e CI=true บอก travis ว่า environment เป็น CI จะเอาไว้เทส
+
+after_success:
+    - docker build -t lek/multi-client ./client
+    - docker build -t lek/multi-nginx ./nginx
+    - docker build -t lek/multi-server ./server
+    - docker build -t lek/multi-wokrer ./worker
