@@ -3,20 +3,20 @@ services:
     - docker
 
 before_install:
-    - docker build -t lek/react-test -f  ./client/Dockerfile.dev ./client
+    - docker build -t enckedream/react-test -f  ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true lek/react-test npm test #เติม -- --coverage เอาไว้เพื่อให้เวลา run test จบจะออกจาก command ของ docker
+    - docker run -e CI=true enckedream/react-test npm test #เติม -- --coverage เอาไว้เพื่อให้เวลา run test จบจะออกจาก command ของ docker
     # -e CI=true บอก travis ว่า environment เป็น CI จะเอาไว้เทส
 
 after_success:
-    - docker build -t lek/multi-client ./client
-    - docker build -t lek/multi-nginx ./nginx
-    - docker build -t lek/multi-server ./server
-    - docker build -t lek/multi-wokrer ./worker
+    - docker build -t enckedream/multi-client ./client
+    - docker build -t enckedream/multi-nginx ./nginx
+    - docker build -t enckedream/multi-server ./server
+    - docker build -t enckedream/multi-wokrer ./worker
     # login to docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker push lek/multi-client
-    - docker push lek/multi-nginx
-    - docker push lek/multi-server
-    - docker push lek/multi-wokrer
+    - docker push enckedream/multi-client
+    - docker push enckedream/multi-nginx
+    - docker push enckedream/multi-server
+    - docker push enckedream/multi-wokrer
