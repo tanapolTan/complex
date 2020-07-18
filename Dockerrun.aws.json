@@ -1,0 +1,23 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containnerDefinitions": [
+        {
+            "name": "client",
+            "image": "enckedream/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "enckedream/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "enckedream/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        }
+    ]
+}
