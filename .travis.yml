@@ -14,3 +14,9 @@ after_success:
     - docker build -t lek/multi-nginx ./nginx
     - docker build -t lek/multi-server ./server
     - docker build -t lek/multi-wokrer ./worker
+    # login to docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    - docker push lek/multi-client
+    - docker push lek/multi-nginx
+    - docker push lek/multi-server
+    - docker push lek/multi-wokrer
